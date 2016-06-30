@@ -1,0 +1,34 @@
+{
+    "name": "bolt/directory-index",
+    "description": "File & directory index handler",
+    "type": "bolt-extension",
+    "keywords": [
+        "files",
+        "directories",
+        "download"
+    ],
+    "require": {
+        "bolt/bolt": "^3.0"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Gawain Lynch",
+            "email": "gawain.lynch@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "Bolt\\Extension\\Bolt\\DirectoryIndex\\": "src"
+        }
+    },
+    "extra": {
+        "bolt-assets": "web",
+        "bolt-class": "Bolt\\Extension\\Bolt\\DirectoryIndex\\DirectoryIndexExtension",
+        "branch-alias": {
+            "dev-master": "3.0.x-dev"
+        }
+    }
+}
