@@ -38,6 +38,24 @@ class Config extends AbstractConfig
     }
 
     /**
+     * @param string
+     *
+     * @return string
+     */
+    public function getTemplate($template)
+    {
+        return $this->get('templates')->get($template);
+    }
+
+    /**
+     * @return array
+     */
+    public function getTemplates()
+    {
+        return $this->get('templates');
+    }
+
+    /**
      * {@inheritdoc}
      */
     protected function initialise()
