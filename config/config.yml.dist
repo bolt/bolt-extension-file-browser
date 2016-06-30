@@ -1,0 +1,9 @@
+
+##
+## Routes to mounts controllers on
+##
+#routes:
+#    distribution:
+#        mount: distribution
+#    kittens:
+#        mount: internet

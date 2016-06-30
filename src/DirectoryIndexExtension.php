@@ -42,11 +42,7 @@ class DirectoryIndexExtension extends SimpleExtension
     {
         return [
             'routes' => [
-                'distribution' => [
-                    'mount' => 'distribution',
-                ],
             ],
-
         ];
     }
 }
