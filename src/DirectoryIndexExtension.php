@@ -23,4 +23,28 @@ class DirectoryIndexExtension extends SimpleExtension
             }
         );
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function registerFrontendControllers()
+    {
+        $app = $this->getContainer();
+        $config = $this->getConfig();
+        $mount = '/' . ltrim($config['mount'], '/');
+
+        return [
+            $mount => new Controller\Index($app['directory_index.config']),
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getDefaultConfig()
+    {
+        return [
+            'mount' => 'distribution',
+        ];
+    }
 }
