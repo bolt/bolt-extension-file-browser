@@ -53,6 +53,7 @@ class DirectoryIndexExtension extends SimpleExtension
             'routes' => [
             ],
             'templates' => [
+                'parent'    => '@DirectoryIndex/_default.twig',
                 'index'     => '@DirectoryIndex/index.twig',
                 'header'    => '@DirectoryIndex/_header.twig',
                 'directory' => '@DirectoryIndex/_directory.twig',
