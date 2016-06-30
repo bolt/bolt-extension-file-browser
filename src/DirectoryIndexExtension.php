@@ -3,6 +3,7 @@
 namespace Bolt\Extension\Bolt\DirectoryIndex;
 
 use Bolt\Application;
+use Bolt\Extension\Bolt\DirectoryIndex\Config;
 use Bolt\Extension\SimpleExtension;
 
 /**
@@ -29,12 +30,8 @@ class DirectoryIndexExtension extends SimpleExtension
      */
     protected function registerFrontendControllers()
     {
-        $app = $this->getContainer();
-        $config = $this->getConfig();
-        $mount = '/' . ltrim($config['mount'], '/');
-
         return [
-            $mount => new Controller\Index($app['directory_index.config']),
+            '/' => new Controller\Index(),
         ];
     }
 
@@ -44,7 +41,12 @@ class DirectoryIndexExtension extends SimpleExtension
     protected function getDefaultConfig()
     {
         return [
-            'mount' => 'distribution',
+            'routes' => [
+                'distribution' => [
+                    'mount' => 'distribution',
+                ],
+            ],
+
         ];
     }
 }
