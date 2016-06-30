@@ -48,6 +48,34 @@ class Route extends AbstractConfig
     }
 
     /**
+     * @return bool
+     */
+    public function hasSourceDir()
+    {
+        return $this->getBoolean('source', false);
+    }
+
+    /**
+     * @return string
+     */
+    public function getSourceDir()
+    {
+        return $this->get('source');
+    }
+
+    /**
+     * @param string $sourceDir
+     *
+     * @return Route
+     */
+    public function setSourceDir($sourceDir)
+    {
+        $this->set('source', $sourceDir);
+
+        return $this;
+    }
+
+    /**
      * {@inheritdoc}
      */
     protected function initialise()
