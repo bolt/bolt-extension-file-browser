@@ -3,7 +3,6 @@
 namespace Bolt\Extension\Bolt\DirectoryIndex;
 
 use Bolt\Application;
-use Bolt\Extension\Bolt\DirectoryIndex\Config;
 use Bolt\Extension\SimpleExtension;
 
 /**
@@ -38,10 +37,26 @@ class DirectoryIndexExtension extends SimpleExtension
     /**
      * {@inheritdoc}
      */
+    protected function registerTwigPaths()
+    {
+        return [
+            'templates' => ['namespace' => 'DirectoryIndex'],
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getDefaultConfig()
     {
         return [
             'routes' => [
+            ],
+            'templates' => [
+                'index'     => '@DirectoryIndex/index.twig',
+                'header'    => '@DirectoryIndex/_header.twig',
+                'directory' => '@DirectoryIndex/_directory.twig',
+                'file'      => '@DirectoryIndex/_file.twig',
             ],
         ];
     }
