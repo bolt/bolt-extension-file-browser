@@ -52,7 +52,7 @@ class Route extends AbstractConfig
      */
     public function hasSourceDir()
     {
-        return $this->getBoolean('source', false);
+        return $this->get('source', false) !== null;
     }
 
     /**
