@@ -10,6 +10,7 @@ use Silex\ControllerCollection;
 use Silex\ControllerProviderInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -101,7 +102,7 @@ class Index implements ControllerProviderInterface
         $sourceDir = $mountConfig->getSourceDir();
         $targetPath = $sourceDir . '/' . $url;
         if (is_file($targetPath)) {
-            return $this->handleDownload($app, $config, $targetPath);
+            return new BinaryFileResponse($targetPath);
         }
 
         $fs = new Filesystem();
@@ -141,10 +142,5 @@ class Index implements ControllerProviderInterface
         $html = $app['twig']->render($config->getTemplate('index'), $context);
 
         return new Response($html);
-    }
-
-    protected function handleDownload(Application $app, Config\Config $config, $targetPath)
-    {
-
     }
 }
