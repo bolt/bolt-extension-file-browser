@@ -182,6 +182,6 @@ class Index implements ControllerProviderInterface
             return false;
         }
 
-        return sprintf('../%s', dirname($url) === '.' ? $mount : dirname($url));
+        return sprintf('/%s/%s', $mount, dirname($url) === '.' ? '' : dirname($url));
     }
 }
