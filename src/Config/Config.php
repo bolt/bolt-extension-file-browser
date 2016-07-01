@@ -56,6 +56,14 @@ class Config extends AbstractConfig
     }
 
     /**
+     * @return boolean
+     */
+    public function isFontAwesome()
+    {
+        return $this->getBoolean('font_awesome');
+    }
+
+    /**
      * {@inheritdoc}
      */
     protected function initialise()

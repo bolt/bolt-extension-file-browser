@@ -50,6 +50,7 @@ class DirectoryIndexExtension extends SimpleExtension
     protected function getDefaultConfig()
     {
         return [
+            'font_awesome'  => false,
             'routes' => [
             ],
             'templates' => [

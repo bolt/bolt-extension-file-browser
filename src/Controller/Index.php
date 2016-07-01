@@ -2,6 +2,8 @@
 
 namespace Bolt\Extension\Bolt\DirectoryIndex\Controller;
 
+use Bolt\Asset\Snippet\Snippet;
+use Bolt\Asset\Target;
 use Bolt\Extension\Bolt\DirectoryIndex\Config;
 use Silex\Application;
 use Silex\ControllerCollection;
@@ -58,6 +60,16 @@ class Index implements ControllerProviderInterface
      */
     public function before(Request $request, Application $app)
     {
+        if (!$this->config->isFontAwesome()) {
+            return;
+        }
+
+        $snippet = new Snippet();
+        $snippet
+            ->setCallback('<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">')
+            ->setLocation(Target::AFTER_HEAD_CSS)
+        ;
+        $app['asset.queue.snippet']->add($snippet);
     }
 
     /**

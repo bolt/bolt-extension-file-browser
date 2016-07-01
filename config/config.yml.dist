@@ -1,4 +1,7 @@
 
+## Load CSS for Font Awesome
+font_awesome: true
+
 ##
 ## Routes to mounts controllers on
 ##
