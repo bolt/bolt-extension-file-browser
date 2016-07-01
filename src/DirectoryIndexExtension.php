@@ -15,6 +15,14 @@ class DirectoryIndexExtension extends SimpleExtension
     /**
      * {@inheritdoc}
      */
+    public function getDisplayName()
+    {
+        return 'File & Directory Browser';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function registerServices(Application $app)
     {
         $app['directory_index.config'] = $app->share(

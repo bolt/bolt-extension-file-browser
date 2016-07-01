@@ -1,3 +1,3 @@
-File & Directory Index Handler
-==============================
+File & Directory Browser
+========================
 
