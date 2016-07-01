@@ -4,5 +4,5 @@
  #   file — An SplFileInfo object representing a file
  #}
 <td><a href="{{ base ~ '/' ~ file.relativePathname|e('html') }}">{{ file.filename }}</a></td>
-<td class="text-right file-size" data-src="{{ file.size }}">{{ file.size }}</td>
-<td class="text-right">{{ file.mtime|date('Y-m-d h:m:s') }}</td>
+<td class="text-right file-size" data-src="{{ file.size }}" title="{{ file.size }}">{{ file.size }}</td>
+<td class="text-right"><time datetime="{{ file.mtime|date('Y-m-d h:m:s') }}" title="{{ file.mtime|date('Y-m-d h:m:s') }}">{{ file.mtime|date('Y-m-d h:m:s') }}</time></td>
