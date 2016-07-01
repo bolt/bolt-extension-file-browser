@@ -2,9 +2,11 @@
 
 namespace Bolt\Extension\Bolt\DirectoryIndex\Controller;
 
+use Bolt\Asset\File\JavaScript;
 use Bolt\Asset\Snippet\Snippet;
 use Bolt\Asset\Target;
 use Bolt\Extension\Bolt\DirectoryIndex\Config;
+use Bolt\Extension\Bolt\DirectoryIndex\DirectoryIndexExtension;
 use Silex\Application;
 use Silex\ControllerCollection;
 use Silex\ControllerProviderInterface;
@@ -61,16 +63,43 @@ class Index implements ControllerProviderInterface
      */
     public function before(Request $request, Application $app)
     {
-        if (!$this->config->isFontAwesome()) {
-            return;
+        $snippets = [];
+        $this->config->set('general/add_jquery', true);
+
+        // Moment.JS
+        if ($this->config->isMomentJs()) {
+            $snippet = new Snippet();
+            $snippet
+                ->setCallback('<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>')
+                ->setLocation(Target::END_OF_BODY)
+                ->setPriority(0)
+            ;
+            $snippets[] = $snippet;
         }
 
-        $snippet = new Snippet();
-        $snippet
-            ->setCallback('<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">')
-            ->setLocation(Target::AFTER_HEAD_CSS)
+        if ($this->config->isFontAwesome()) {
+            $snippet = new Snippet();
+            $snippet
+                ->setCallback('<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">')
+                ->setLocation(Target::AFTER_HEAD_CSS)
+            ;
+            $snippets[] = $snippet;
+        }
+
+        foreach ($snippets as $snippet) {
+            $app['asset.queue.snippet']->add($snippet);
+        }
+
+        /** @var DirectoryIndexExtension $extension */
+        $extension = $app['extensions']->get('Bolt/DirectoryIndex');
+        $dir = '/' . $extension->getWebDirectory()->getPath();
+        $javaScript = new JavaScript();
+        $javaScript
+            ->setFileName($dir . '/directory-index.js')
+            ->setLocation(Target::END_OF_HTML)
+            ->setPriority(-10)
         ;
-        $app['asset.queue.snippet']->add($snippet);
+        $app['asset.queue.file']->add($javaScript);
     }
 
     /**

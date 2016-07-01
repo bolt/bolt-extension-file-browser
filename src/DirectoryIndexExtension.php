@@ -50,8 +50,11 @@ class DirectoryIndexExtension extends SimpleExtension
     protected function getDefaultConfig()
     {
         return [
-            'font_awesome'  => false,
-            'routes' => [
+            'assets'    => [
+                'moment_js'     => true,
+                'font_awesome'  => true,
+            ],
+            'routes'    => [
             ],
             'templates' => [
                 'parent'    => '@DirectoryIndex/_default.twig',

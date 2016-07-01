@@ -1,6 +1,8 @@
 
 ## Load CSS for Font Awesome
-font_awesome: true
+assets:
+    moment_js: true
+    font_awesome: true
 
 ##
 ## Routes to mounts controllers on

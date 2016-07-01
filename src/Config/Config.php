@@ -58,9 +58,17 @@ class Config extends AbstractConfig
     /**
      * @return boolean
      */
+    public function isMomentJs()
+    {
+        return $this->get('assets')->getBoolean('moment_js');
+    }
+
+    /**
+     * @return boolean
+     */
     public function isFontAwesome()
     {
-        return $this->getBoolean('font_awesome');
+        return $this->get('assets')->getBoolean('font_awesome');
     }
 
     /**
