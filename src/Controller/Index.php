@@ -107,7 +107,7 @@ class Index implements ControllerProviderInterface
 
         $fs = new Filesystem();
         if (!$fs->exists($targetPath)) {
-            return 'Nadda here';
+            return 'Not found';
         }
 
         $directories = new Finder();
@@ -136,11 +136,27 @@ class Index implements ControllerProviderInterface
             ],
             'directories' => $directories,
             'files'       => $files,
-            'base'        => $request->getRequestUri()
+            'base'        => $request->getRequestUri(),
+            'parent_dir'  => $this->getParentDirectoryName($mount, $url),
         ];
 
         $html = $app['twig']->render($config->getTemplate('index'), $context);
 
         return new Response($html);
+    }
+
+    /**
+     * @param string $mount
+     * @param string $url
+     *
+     * @return bool|string
+     */
+    private function getParentDirectoryName($mount, $url)
+    {
+        if ($url === '') {
+            return false;
+        }
+
+        return sprintf('../%s', dirname($url) === '.' ? $mount : dirname($url));
     }
 }
