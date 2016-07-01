@@ -1,5 +1,16 @@
+{#
+ # Passed in variables:
+ #   templates
+ #     parent    — The name of the template to extend
+ #     index     — Index listing template
+ #     header    — Table header template
+ #     directory — Directory entry template
+ #     file      — File entry template
+ #   directories — An array of SplFileInfo objects for directories in this directory
+ #   files       — An array of SplFileInfo objects for files in this directory
+ #   base        — The Base URL for the directory containing this file
+ #}
 {% extends templates.parent %}
-
 
 {% block directory_index %}
     {% block fa_css %}
