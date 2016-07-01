@@ -31,3 +31,24 @@ routes:
         mount: downloads/videos
         source: /data/export/media/videos
 ```
+
+### Web Server
+
+You may need to adjust web server rules to allow/disallow certain file types.
+
+Some *examples* below. 
+
+#### Nginx
+
+```
+    location ~* /downloads/.*\.(?:doc|gif|ico|jpe?g|jpeg|jpg|mp4|ogg|ogv|png|ppt|svg|svgz|wav|xls)$ {
+        expires             max;
+        add_header          Pragma public;
+        add_header          Cache-Control "public, mustrevalidate, proxy-revalidate";
+        try_files           $uri $uri/ /index.php?$query_string;
+    }
+```
+
+#### Apache
+
+`<PR welcome>`
