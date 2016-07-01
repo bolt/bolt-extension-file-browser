@@ -1,6 +1,6 @@
 <?php
 
-namespace Bolt\Extension\Bolt\DirectoryIndex\Config;
+namespace Bolt\Extension\Bolt\FileDirectoryBrowser\Config;
 
 use Symfony\Component\HttpFoundation\ParameterBag;
 

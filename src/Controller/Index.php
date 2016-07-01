@@ -1,12 +1,12 @@
 <?php
 
-namespace Bolt\Extension\Bolt\DirectoryIndex\Controller;
+namespace Bolt\Extension\Bolt\FileDirectoryBrowser\Controller;
 
 use Bolt\Asset\File\JavaScript;
 use Bolt\Asset\Snippet\Snippet;
 use Bolt\Asset\Target;
-use Bolt\Extension\Bolt\DirectoryIndex\Config;
-use Bolt\Extension\Bolt\DirectoryIndex\FileDirectoryBrowserExtension;
+use Bolt\Extension\Bolt\FileDirectoryBrowser\Config;
+use Bolt\Extension\Bolt\FileDirectoryBrowser\FileDirectoryBrowserExtension;
 use Silex\Application;
 use Silex\ControllerCollection;
 use Silex\ControllerProviderInterface;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Bolt\Extension\Bolt\DirectoryIndex;
+namespace Bolt\Extension\Bolt\FileDirectoryBrowser;
 
 use Bolt\Application;
 use Bolt\Extension\SimpleExtension;
@@ -48,7 +48,7 @@ class FileDirectoryBrowserExtension extends SimpleExtension
     protected function registerTwigPaths()
     {
         return [
-            'templates' => ['namespace' => 'DirectoryIndex'],
+            'templates' => ['namespace' => 'FileDirectoryBrowser'],
         ];
     }
 
@@ -65,11 +65,11 @@ class FileDirectoryBrowserExtension extends SimpleExtension
             'routes'    => [
             ],
             'templates' => [
-                'parent'    => '@DirectoryIndex/_default.twig',
-                'index'     => '@DirectoryIndex/index.twig',
-                'header'    => '@DirectoryIndex/_header.twig',
-                'directory' => '@DirectoryIndex/_directory.twig',
-                'file'      => '@DirectoryIndex/_file.twig',
+                'parent'    => '@FileDirectoryBrowser/_default.twig',
+                'index'     => '@FileDirectoryBrowser/index.twig',
+                'header'    => '@FileDirectoryBrowser/_header.twig',
+                'directory' => '@FileDirectoryBrowser/_directory.twig',
+                'file'      => '@FileDirectoryBrowser/_file.twig',
             ],
         ];
     }

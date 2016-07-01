@@ -21,12 +21,12 @@
     "prefer-stable": true,
     "autoload": {
         "psr-4": {
-            "Bolt\\Extension\\Bolt\\DirectoryIndex\\": "src"
+            "Bolt\\Extension\\Bolt\\FileDirectoryBrowser\\": "src"
         }
     },
     "extra": {
         "bolt-assets": "web",
-        "bolt-class": "Bolt\\Extension\\Bolt\\DirectoryIndex\\FileDirectoryBrowserExtension",
+        "bolt-class": "Bolt\\Extension\\Bolt\\FileDirectoryBrowser\\FileDirectoryBrowserExtension",
         "branch-alias": {
             "dev-master": "3.0.x-dev"
         }
