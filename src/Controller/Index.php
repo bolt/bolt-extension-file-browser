@@ -31,21 +31,18 @@ class Index implements ControllerProviderInterface
         /** @var $ctr ControllerCollection */
         $ctr = $app['controllers_factory'];
 
-        /**
-         * @var string       $mount
-         * @var Config\Route $route
-         */
-        foreach ($this->config->getRoutes()->all() as $mount => $route) {
-            $mount = rtrim(ltrim($mount, '/'), '/');
-            $ctr->match($mount, [$this, 'index'])
-                ->bind('directoryIndex_' . $mount . '_base')
-                ->value('mount', $mount)
+        foreach ($this->config->getRoutes()->keys() as $mountName) {
+            $route = $this->config->getRoute($mountName);
+            $mountPath = $route->getMountPoint();
+            $ctr->match($mountPath, [$this, 'index'])
+                ->bind('directoryIndex_' . $mountName . '_base')
+                ->value('route', $route)
                 ->value('url', '')
                 ->method('GET|POST')
             ;
-            $ctr->match($mount . '/{url}', [$this, 'index'])
-                ->bind('directoryIndex_' . $mount)
-                ->value('mount', $mount)
+            $ctr->match($mountPath . '/{url}', [$this, 'index'])
+                ->bind('directoryIndex_' . $mountName)
+                ->value('route', $route)
                 ->assert('url', '.+')
                 ->method('GET|POST')
             ;
@@ -112,23 +109,22 @@ class Index implements ControllerProviderInterface
     }
 
     /**
-     * @param Application $app
-     * @param Request     $request
-     * @param string      $mount
-     * @param string      $url
+     * @param Application  $app
+     * @param Request      $request
+     * @param Config\Route $route
+     * @param string       $url
      *
      * @return Response
      */
-    public function index(Application $app, Request $request, $mount, $url)
+    public function index(Application $app, Request $request, Config\Route $route, $url)
     {
         /** @var Config\Config $config */
         $config = $app['directory_index.config'];
-        $mountConfig = $config->getRoute($mount);
 
-        if (!$mountConfig->hasSourceDir()) {
-            throw new \RuntimeException(sprintf('Mount "%s" is missing source directory value.', $mount));
+        if (!$route->hasSourceDir()) {
+            throw new \RuntimeException(sprintf('Mount "%s" is missing source directory value.', $route->getMountPoint()));
         }
-        $sourceDir = $mountConfig->getSourceDir();
+        $sourceDir = $route->getSourceDir();
         $targetPath = $sourceDir . '/' . $url;
         if (is_file($targetPath)) {
             return new BinaryFileResponse($targetPath);
@@ -166,7 +162,7 @@ class Index implements ControllerProviderInterface
             'directories' => $directories,
             'files'       => $files,
             'base'        => $request->getRequestUri(),
-            'parent_dir'  => $this->getParentDirectoryName($mount, $url),
+            'parent_dir'  => $this->getParentDirectoryName($route->getMountPoint(), $url),
         ];
 
         $html = $app['twig']->render($config->getTemplate('index'), $context);

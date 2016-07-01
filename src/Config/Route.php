@@ -32,7 +32,7 @@ class Route extends AbstractConfig
      */
     public function getMountPoint()
     {
-        return $this->get('mount');
+        return rtrim(ltrim($this->get('mount'), '/'), '/');
     }
 
     /**
