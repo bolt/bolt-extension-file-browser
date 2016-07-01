@@ -5,10 +5,15 @@ assets:
     font_awesome: true
 
 ##
-## Routes to mounts controllers on
+## Routes to mounts controllers on and the directories they share
 ##
 #routes:
-#    distribution:
-#        mount: distribution
-#    kittens:
-#        mount: internet
+#    manuals:
+#        mount: manuals
+#        source: /public/manuals
+#    pictures:
+#        mount: downloads/pictures
+#        source: /data/export/media/pictures
+#    videos:
+#        mount: downloads/videos
+#        source: /data/export/media/videos
