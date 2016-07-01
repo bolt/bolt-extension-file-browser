@@ -6,7 +6,7 @@ use Bolt\Asset\File\JavaScript;
 use Bolt\Asset\Snippet\Snippet;
 use Bolt\Asset\Target;
 use Bolt\Extension\Bolt\DirectoryIndex\Config;
-use Bolt\Extension\Bolt\DirectoryIndex\DirectoryIndexExtension;
+use Bolt\Extension\Bolt\DirectoryIndex\FileDirectoryBrowserExtension;
 use Silex\Application;
 use Silex\ControllerCollection;
 use Silex\ControllerProviderInterface;
@@ -90,8 +90,8 @@ class Index implements ControllerProviderInterface
             $app['asset.queue.snippet']->add($snippet);
         }
 
-        /** @var DirectoryIndexExtension $extension */
-        $extension = $app['extensions']->get('Bolt/DirectoryIndex');
+        /** @var FileDirectoryBrowserExtension $extension */
+        $extension = $app['extensions']->get('Bolt/FileDirectoryBrowser');
         $dir = '/' . $extension->getWebDirectory()->getPath();
         $javaScript = new JavaScript();
         $javaScript

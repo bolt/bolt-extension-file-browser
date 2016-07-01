@@ -10,7 +10,7 @@ use Bolt\Extension\SimpleExtension;
  *
  * @author Gawain Lynch <gawain.lynch@gmail.com>
  */
-class DirectoryIndexExtension extends SimpleExtension
+class FileDirectoryBrowserExtension extends SimpleExtension
 {
     /**
      * {@inheritdoc}
