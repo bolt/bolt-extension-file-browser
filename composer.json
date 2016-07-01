@@ -1,11 +1,12 @@
 {
-    "name": "bolt/directory-index",
-    "description": "File & directory index handler",
+    "name": "bolt/file-browser",
+    "description": "File & directory browser",
     "type": "bolt-extension",
     "keywords": [
-        "files",
+        "browse",
         "directories",
-        "download"
+        "download",
+        "files"
     ],
     "require": {
         "bolt/bolt": "^3.0"
