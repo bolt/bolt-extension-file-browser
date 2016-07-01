@@ -3,6 +3,6 @@
  #   base — The Base URL for the directory containing this file
  #   file — An SplFileInfo object representing a file
  #}
-<td><i class="fa fa-fw fa-folder"></i> <a href="{{ base ~ '/' ~ file.relativePathname }}">{{ file.filename }}</a></td>
+<td><a href="{{ base ~ '/' ~ file.relativePathname }}">{{ file.filename }}</a></td>
 <td class="text-right">{{ file.size }}</td>
 <td class="text-right">{{ file.mtime|date('Y-m-d h:m:s') }}</td>
