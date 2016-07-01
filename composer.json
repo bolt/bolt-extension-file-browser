@@ -30,6 +30,10 @@
         "bolt-class": "Bolt\\Extension\\Bolt\\FileDirectoryBrowser\\FileDirectoryBrowserExtension",
         "branch-alias": {
             "dev-master": "3.0.x-dev"
-        }
+        },
+        "bolt-screenshots": [
+            "screenshot-main.png",
+            "screenshot-subdirectory.png"
+        ]
     }
 }
