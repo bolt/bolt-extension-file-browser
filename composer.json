@@ -28,12 +28,13 @@
     "extra": {
         "bolt-assets": "web",
         "bolt-class": "Bolt\\Extension\\Bolt\\FileDirectoryBrowser\\FileDirectoryBrowserExtension",
-        "branch-alias": {
-            "dev-master": "3.0.x-dev"
-        },
+        "bolt-icon": "icon.png",
         "bolt-screenshots": [
             "screenshot-main.png",
             "screenshot-subdirectory.png"
-        ]
+        ],
+        "branch-alias": {
+            "dev-master": "3.0.x-dev"
+        }
     }
 }
