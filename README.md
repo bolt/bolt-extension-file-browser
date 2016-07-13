@@ -1,7 +1,7 @@
 File & Directory Browser
 ========================
 
-This is a simple extension that will mount and mange pre-configured routes that
+This is a simple extension that will mount and manage pre-configured routes that
 serve file system directories.
 
 **NOTE:** 
