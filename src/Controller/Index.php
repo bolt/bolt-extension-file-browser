@@ -5,6 +5,7 @@ namespace Bolt\Extension\Bolt\FileDirectoryBrowser\Controller;
 use Bolt\Asset\File\JavaScript;
 use Bolt\Asset\Snippet\Snippet;
 use Bolt\Asset\Target;
+use Bolt\Controller\Zone;
 use Bolt\Extension\Bolt\FileDirectoryBrowser\Config;
 use Bolt\Extension\Bolt\FileDirectoryBrowser\FileDirectoryBrowserExtension;
 use Silex\Application;
@@ -127,6 +128,9 @@ class Index implements ControllerProviderInterface
         $sourceDir = $route->getSourceDir();
         $targetPath = $sourceDir . '/' . $url;
         if (is_file($targetPath)) {
+            // Prevent the asset queues being processed
+            $request->attributes->set(Zone::KEY, Zone::ASYNC);
+
             return new BinaryFileResponse($targetPath);
         }
 
