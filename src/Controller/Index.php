@@ -131,7 +131,7 @@ class Index implements ControllerProviderInterface
             // Prevent the asset queues being processed
             $request->attributes->set(Zone::KEY, Zone::ASYNC);
 
-            return new BinaryFileResponse($targetPath);
+            return (new BinaryFileResponse($targetPath))->setContentDisposition('attachment');
         }
 
         $fs = new Filesystem();
