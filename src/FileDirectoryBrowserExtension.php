@@ -2,8 +2,8 @@
 
 namespace Bolt\Extension\Bolt\FileDirectoryBrowser;
 
-use Bolt\Application;
 use Bolt\Extension\SimpleExtension;
+use Silex\Application;
 
 /**
  * Directory index extension loader.
