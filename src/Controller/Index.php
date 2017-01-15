@@ -7,10 +7,13 @@ use Bolt\Asset\Snippet\Snippet;
 use Bolt\Asset\Target;
 use Bolt\Controller\Zone;
 use Bolt\Extension\Bolt\FileDirectoryBrowser\Config;
+use Bolt\Extension\Bolt\FileDirectoryBrowser\Event\BrowserEvent;
+use Bolt\Extension\Bolt\FileDirectoryBrowser\Event\BrowserEvents;
 use Bolt\Extension\Bolt\FileDirectoryBrowser\FileDirectoryBrowserExtension;
 use Silex\Application;
 use Silex\ControllerCollection;
 use Silex\ControllerProviderInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
@@ -122,6 +125,8 @@ class Index implements ControllerProviderInterface
         $fs = new Filesystem();
         /** @var Config\Config $config */
         $config = $app['directory_index.config'];
+        /** @var EventDispatcherInterface $dispatcher */
+        $dispatcher = $app['dispatcher'];
 
         if (!$route->hasSourceDir()) {
             throw new \RuntimeException(sprintf('Directory Browser mount "%s" is missing source directory value.', $route->getMountPoint()));
@@ -129,8 +134,12 @@ class Index implements ControllerProviderInterface
         if (!$fs->exists($route->getSourceDir())) {
             throw new \RuntimeException(sprintf('Directory Browser mount "%s" is missing source directory %s.', $route->getMountPoint(), $route->getSourceDir()));
         }
-        $sourceDir = $route->getSourceDir();
-        $targetPath = $sourceDir . '/' . $url;
+
+        // Dispatch an event to allow listeners to modify requests
+        $event = new BrowserEvent($request, $route, $url);
+        $dispatcher->dispatch(BrowserEvents::BROWSE_REQUEST, $event);
+
+        $targetPath = $event->getTargetPath();
         if (is_file($targetPath)) {
             // Prevent the asset queues being processed
             $request->attributes->set(Zone::KEY, Zone::ASYNC);
