@@ -119,11 +119,15 @@ class Index implements ControllerProviderInterface
      */
     public function index(Application $app, Request $request, Config\Route $route, $url)
     {
+        $fs = new Filesystem();
         /** @var Config\Config $config */
         $config = $app['directory_index.config'];
 
         if (!$route->hasSourceDir()) {
-            throw new \RuntimeException(sprintf('Mount "%s" is missing source directory value.', $route->getMountPoint()));
+            throw new \RuntimeException(sprintf('Directory Browser mount "%s" is missing source directory value.', $route->getMountPoint()));
+        }
+        if (!$fs->exists($route->getSourceDir())) {
+            throw new \RuntimeException(sprintf('Directory Browser mount "%s" is missing source directory %s.', $route->getMountPoint(), $route->getSourceDir()));
         }
         $sourceDir = $route->getSourceDir();
         $targetPath = $sourceDir . '/' . $url;
@@ -134,7 +138,6 @@ class Index implements ControllerProviderInterface
             return (new BinaryFileResponse($targetPath))->setContentDisposition('attachment');
         }
 
-        $fs = new Filesystem();
         if (!$fs->exists($targetPath)) {
             $request->attributes->set(Zone::KEY, Zone::ASYNC);
 
