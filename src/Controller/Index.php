@@ -136,7 +136,9 @@ class Index implements ControllerProviderInterface
 
         $fs = new Filesystem();
         if (!$fs->exists($targetPath)) {
-            return 'Not found';
+            $request->attributes->set(Zone::KEY, Zone::ASYNC);
+
+            return new Response('Not found', Response::HTTP_NOT_FOUND);
         }
 
         $directories = new Finder();
